@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://coastal-lodge.onrender.com",
+  baseURL: "https://coastal-lodge.onrender.com/api",
 });
 
 // Attach JWT token to every request automatically
