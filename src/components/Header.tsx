@@ -1,3 +1,4 @@
+// header.tsx
 import React from "react";
 
 interface HeaderProps {
@@ -15,11 +16,29 @@ const Header: React.FC<HeaderProps> = ({ date, onDateChange, onHistoryOpen }) =>
       backdropFilter: "blur(20px)",
       WebkitBackdropFilter: "blur(20px)",
     }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.5rem" }}>
-        <div style={{ display: "flex", height: 64, alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1rem" }}>
+        <div
+          style={{
+            display: "flex",
+            minHeight: 64,
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 16,
+            flexWrap: "wrap",
+            padding: "0.75rem 0",
+          }}
+        >
 
           {/* Brand */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              minWidth: 0,
+              flex: "1 1 220px",
+            }}
+          >
             <div style={{
               width: 36, height: 36, borderRadius: 10, flexShrink: 0,
               background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
@@ -31,28 +50,68 @@ const Header: React.FC<HeaderProps> = ({ date, onDateChange, onHistoryOpen }) =>
                 <polyline points="9 22 9 12 15 12 15 22" stroke="white" strokeWidth="1.5" fill="none"/>
               </svg>
             </div>
-            <div>
-              <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(167,139,250,0.8)", margin: 0 }}>
+            <div style={{ minWidth: 0 }}>
+              <p
+                style={{
+                  fontSize: "0.65rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "rgba(167,139,250,0.8)",
+                  margin: 0
+                }}
+              >
                 Revenue Control
               </p>
-              <h1 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 800, lineHeight: 1.2, fontFamily: "Syne, sans-serif", color: "#ffffff" }}>
+              <h1
+                style={{
+                  margin: 0,
+                  fontSize: "clamp(0.95rem, 2vw, 1.1rem)",
+                  fontWeight: 800,
+                  lineHeight: 1.2,
+                  fontFamily: "Syne, sans-serif",
+                  color: "#ffffff",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
                 Coastal Dashboard
               </h1>
             </div>
           </div>
 
           {/* Controls */}
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              flexWrap: "wrap",
+              width: "100%",
+              justifyContent: "flex-end",
+              flex: "1 1 260px",
+            }}
+          >
             {/* Date Picker */}
             <input
               type="date"
               value={date}
               onChange={(e) => onDateChange(e.target.value)}
               style={{
-                height: 36, borderRadius: 10, border: "1px solid rgba(255,255,255,0.1)",
-                background: "rgba(255,255,255,0.05)", padding: "0 12px",
-                fontSize: "0.875rem", fontWeight: 500, color: "#ffffff",
-                outline: "none", cursor: "pointer", colorScheme: "dark"
+                height: 36,
+                borderRadius: 10,
+                border: "1px solid rgba(255,255,255,0.1)",
+                background: "rgba(255,255,255,0.05)",
+                padding: "0 12px",
+                fontSize: "0.875rem",
+                fontWeight: 500,
+                color: "#ffffff",
+                outline: "none",
+                cursor: "pointer",
+                colorScheme: "dark",
+                flex: "1 1 160px",
+                minWidth: 0,
               }}
             />
 
@@ -60,11 +119,21 @@ const Header: React.FC<HeaderProps> = ({ date, onDateChange, onHistoryOpen }) =>
             <button
               onClick={onHistoryOpen}
               style={{
-                height: 36, borderRadius: 10, border: "1px solid rgba(255,255,255,0.1)",
-                background: "rgba(255,255,255,0.05)", padding: "0 16px",
-                fontSize: "0.875rem", fontWeight: 600, color: "#cbd5e1",
-                cursor: "pointer", display: "flex", alignItems: "center", gap: 8,
-                transition: "all 0.2s"
+                height: 36,
+                borderRadius: 10,
+                border: "1px solid rgba(255,255,255,0.1)",
+                background: "rgba(255,255,255,0.05)",
+                padding: "0 16px",
+                fontSize: "0.875rem",
+                fontWeight: 600,
+                color: "#cbd5e1",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                transition: "all 0.2s",
+                flex: "1 1 140px",
               }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLButtonElement).style.background = "rgba(124,58,237,0.15)";

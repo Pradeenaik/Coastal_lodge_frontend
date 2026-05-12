@@ -78,8 +78,10 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({
   return (
     <div style={{
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-      gap: "0.75rem"
+      gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
+      gap: "0.75rem",
+      width: "100%",
+      alignItems: "stretch",
     }}>
       {cards.map((card) => (
         <div
@@ -89,11 +91,14 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({
             borderRadius: 16,
             border: "1px solid rgba(255,255,255,0.08)",
             background: card.bg,
-            padding: "1.25rem",
+            padding: "clamp(0.9rem, 2vw, 1.25rem)",
             backdropFilter: "blur(8px)",
             boxShadow: `0 0 40px -12px ${card.glow}`,
             overflow: "hidden",
             transition: "transform 0.2s, box-shadow 0.2s",
+            width: "100%",
+            minWidth: 0,
+            boxSizing: "border-box",
           }}
           onMouseEnter={e => {
             (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)";
@@ -102,19 +107,51 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({
             (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
           }}
         >
-          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
-            <div>
-              <p style={{ margin: 0, fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(148,163,184,0.7)" }}>
+          <div style={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            gap: 12,
+            width: "100%",
+            minWidth: 0,
+          }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <p style={{
+                margin: 0,
+                fontSize: "clamp(0.58rem, 1.5vw, 0.65rem)",
+                fontWeight: 700,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "rgba(148,163,184,0.7)",
+                lineHeight: 1.4,
+                wordBreak: "break-word",
+              }}>
                 {card.label}
               </p>
-              <p style={{ margin: "8px 0 0", fontSize: "1.5rem", fontWeight: 800, fontFamily: "Syne, sans-serif", color: card.textColor, lineHeight: 1 }}>
+
+              <p style={{
+                margin: "8px 0 0",
+                fontSize: "clamp(1.05rem, 4vw, 1.5rem)",
+                fontWeight: 800,
+                fontFamily: "Syne, sans-serif",
+                color: card.textColor,
+                lineHeight: 1.1,
+                wordBreak: "break-word",
+                overflowWrap: "break-word",
+              }}>
                 ₹{card.value.toLocaleString("en-IN")}
               </p>
             </div>
+
             <div style={{
-              width: 40, height: 40, borderRadius: 10, flexShrink: 0,
+              width: "clamp(34px, 8vw, 40px)",
+              height: "clamp(34px, 8vw, 40px)",
+              borderRadius: 10,
+              flexShrink: 0,
               background: card.iconBg,
-              display: "flex", alignItems: "center", justifyContent: "center",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               boxShadow: `0 4px 16px -2px ${card.glow}`
             }}>
               {card.icon}
