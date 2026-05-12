@@ -89,12 +89,7 @@ const App: React.FC = () => {
           );
 
           if (backendRoom) {
-            const commissionType =
-              backendRoom.commission === 200
-                ? "Driver"
-                : backendRoom.commission > 0
-                ? "Custom"
-                : "";
+            const commissionType = backendRoom.commissionType || "";
 
             return {
               roomNumber: backendRoom.roomNumber,

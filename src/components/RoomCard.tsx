@@ -62,20 +62,19 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, onChange, readOnly = false })
     onChange({ ...room, amount });
   };
 
-  const handleCommissionTypeChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    if (readOnly) return;
-    const commissionType = e.target.value as CommissionType;
-    const commission =
-      commissionType === "Driver"
-        ? 200
-        : commissionType === ""
-        ? 0
-        : room.commission;
+const handleCommissionTypeChange = (
+  e: React.ChangeEvent<HTMLSelectElement>
+) => {
+  if (readOnly) return;
 
-    onChange({ ...room, commissionType, commission });
-  };
+  const commissionType = e.target.value as CommissionType;
+
+  onChange({
+    ...room,
+    commissionType,
+    commission: commissionType === "" ? 0 : room.commission,
+  });
+};
 
   const handleCommissionChange = (
     e: React.ChangeEvent<HTMLInputElement>

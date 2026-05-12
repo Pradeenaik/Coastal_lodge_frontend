@@ -11,6 +11,7 @@ export interface ApiRoom {
   roomNumber: number;
   amount: number;
   commission: number;
+  commissionType: CommissionType;
   _id?: string;
 }
 

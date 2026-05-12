@@ -79,17 +79,17 @@ export function useDashboard() {
             (r: ApiRoom) => r.roomNumber === defaultRoom.roomNumber
           );
           if (backendRoom) {
-            const commissionType =
-              backendRoom.commission === 200
-                ? "Driver"
-                : backendRoom.commission > 0
-                ? "Custom"
-                : "";
+            // const commissionType =
+            //   backendRoom.commission === 200
+            //     ? "Driver"
+            //     : backendRoom.commission > 0
+            //     ? "Custom"
+            //     : "";
             return {
               roomNumber: backendRoom.roomNumber,
               amount: backendRoom.amount,
               commission: backendRoom.commission,
-              commissionType: commissionType as Room["commissionType"],
+              commissionType: backendRoom.commissionType as Room["commissionType"],
             };
           }
           return defaultRoom;
