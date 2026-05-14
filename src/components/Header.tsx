@@ -1,4 +1,5 @@
 import React from "react";
+// import coastalLogo from "coastal-lodge.png";
 
 interface HeaderProps {
   date: string;
@@ -109,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({
                 flexShrink: 0,
               }}
             >
-              <div
+              {/* <div
                 style={{
                   width: 38,
                   height: 38,
@@ -137,7 +138,19 @@ const Header: React.FC<HeaderProps> = ({
                     fill="none"
                   />
                 </svg>
-              </div>
+              </div> */}
+
+              <img
+                src="/coastal-lodge.png"
+                alt="Coastal Lodge"
+                style={{
+                  width: 56,
+                  height: 56,
+                  objectFit: "contain",
+                  borderRadius: 14,
+                  flexShrink: 0,
+                }}
+              />
 
               {/* Hide text on very small screens */}
               <div className="header-brand-text">
@@ -147,7 +160,7 @@ const Header: React.FC<HeaderProps> = ({
                     fontWeight: 700,
                     letterSpacing: "0.18em",
                     textTransform: "uppercase",
-                    color: "rgba(167,139,250,0.8)",
+                    color: "#fb923c",
                     margin: 0,
                   }}
                 >
@@ -165,7 +178,7 @@ const Header: React.FC<HeaderProps> = ({
                     whiteSpace: "nowrap",
                   }}
                 >
-                  Hotel Dashboard
+                  Coastal Dashboard
                 </h1>
               </div>
             </div>
