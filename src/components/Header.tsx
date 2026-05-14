@@ -1,160 +1,363 @@
-// header.tsx
 import React from "react";
 
 interface HeaderProps {
   date: string;
   onDateChange: (date: string) => void;
   onHistoryOpen: () => void;
+  activeTab: "dashboard" | "analytics";
+  onTabChange: (tab: "dashboard" | "analytics") => void;
+  onLogout?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ date, onDateChange, onHistoryOpen }) => {
+const Header: React.FC<HeaderProps> = ({
+  date,
+  onDateChange,
+  onHistoryOpen,
+  activeTab,
+  onTabChange,
+  onLogout,
+}) => {
+  const isActive = (tab: "dashboard" | "analytics") => activeTab === tab;
+
+  const tabButtonStyle = (active: boolean): React.CSSProperties => ({
+    height: 36,
+    borderRadius: 10,
+    padding: "0 12px",
+    fontSize: "0.78rem",
+    fontWeight: 700,
+    cursor: "pointer",
+    border: active
+      ? "1px solid rgba(124,58,237,0.4)"
+      : "1px solid transparent",
+    background: active ? "rgba(124,58,237,0.15)" : "transparent",
+    color: active ? "#a78bfa" : "#94a3b8",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    transition: "all 0.2s ease",
+    whiteSpace: "nowrap",
+    flexShrink: 0,
+  });
+
+  const controlButtonStyle: React.CSSProperties = {
+    height: 36,
+    borderRadius: 10,
+    border: "1px solid rgba(255,255,255,0.1)",
+    background: "rgba(255,255,255,0.05)",
+    padding: "0 12px",
+    fontSize: "0.8rem",
+    fontWeight: 600,
+    color: "#cbd5e1",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    transition: "all 0.2s ease",
+    flexShrink: 0,
+  };
+
   return (
-    <header style={{
-      position: "sticky", top: 0, zIndex: 30, width: "100%",
-      borderBottom: "1px solid rgba(255,255,255,0.06)",
-      background: "rgba(10,10,15,0.85)",
-      backdropFilter: "blur(20px)",
-      WebkitBackdropFilter: "blur(20px)",
-    }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1rem" }}>
+    <header
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        width: "100%",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        background: "rgba(10,10,15,0.88)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: 1440,
+          margin: "0 auto",
+          padding: "0 1rem",
+        }}
+      >
         <div
           style={{
+            minHeight: 72,
             display: "flex",
-            minHeight: 64,
             alignItems: "center",
             justifyContent: "space-between",
-            gap: 16,
+            gap: 12,
             flexWrap: "wrap",
-            padding: "0.75rem 0",
+            padding: "12px 0",
           }}
         >
-
-          {/* Brand */}
+          {/* LEFT SECTION */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               gap: 12,
               minWidth: 0,
-              flex: "1 1 220px",
+              flex: "1 1 auto",
             }}
           >
-            <div style={{
-              width: 36, height: 36, borderRadius: 10, flexShrink: 0,
-              background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              boxShadow: "0 4px 20px rgba(124,58,237,0.4)"
-            }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-                <polyline points="9 22 9 12 15 12 15 22" stroke="white" strokeWidth="1.5" fill="none"/>
-              </svg>
+            {/* Brand */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                flexShrink: 0,
+              }}
+            >
+              <div
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: 12,
+                  background:
+                    "linear-gradient(135deg, #7c3aed, #4f46e5)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 4px 16px rgba(124,58,237,0.35)",
+                  flexShrink: 0,
+                }}
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                >
+                  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                  <polyline
+                    points="9 22 9 12 15 12 15 22"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                </svg>
+              </div>
+
+              {/* Hide text on very small screens */}
+              <div className="header-brand-text">
+                <p
+                  style={{
+                    fontSize: "0.62rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    color: "rgba(167,139,250,0.8)",
+                    margin: 0,
+                  }}
+                >
+                  Revenue Control
+                </p>
+
+                <h1
+                  style={{
+                    margin: 0,
+                    fontSize: "1rem",
+                    fontWeight: 800,
+                    fontFamily: "Syne, sans-serif",
+                    color: "#fff",
+                    lineHeight: 1.2,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Hotel Dashboard
+                </h1>
+              </div>
             </div>
-            <div style={{ minWidth: 0 }}>
-              <p
-                style={{
-                  fontSize: "0.65rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "rgba(167,139,250,0.8)",
-                  margin: 0
-                }}
+
+            {/* TABS */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                overflowX: "auto",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+            >
+              <button
+                onClick={() => onTabChange("dashboard")}
+                style={tabButtonStyle(isActive("dashboard"))}
               >
-                Revenue Control
-              </p>
-              <h1
-                style={{
-                  margin: 0,
-                  fontSize: "clamp(0.95rem, 2vw, 1.1rem)",
-                  fontWeight: 800,
-                  lineHeight: 1.2,
-                  fontFamily: "Syne, sans-serif",
-                  color: "#ffffff",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                </svg>
+
+                <span>Dashboard</span>
+              </button>
+
+              <button
+                onClick={() => onTabChange("analytics")}
+                style={tabButtonStyle(isActive("analytics"))}
               >
-                Coastal Dashboard
-              </h1>
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="18" y1="20" x2="18" y2="10" />
+                  <line x1="12" y1="20" x2="12" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
+
+                <span>Analytics</span>
+              </button>
             </div>
           </div>
 
-          {/* Controls */}
+          {/* RIGHT SECTION */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 10,
+              justifyContent: "flex-end",
+              gap: 8,
               flexWrap: "wrap",
               width: "100%",
-              justifyContent: "flex-end",
-              flex: "1 1 260px",
+              flex: "1 1 100%",
             }}
+            className="header-controls"
           >
-            {/* Date Picker */}
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => onDateChange(e.target.value)}
-              style={{
-                height: 36,
-                borderRadius: 10,
-                border: "1px solid rgba(255,255,255,0.1)",
-                background: "rgba(255,255,255,0.05)",
-                padding: "0 12px",
-                fontSize: "0.875rem",
-                fontWeight: 500,
-                color: "#ffffff",
-                outline: "none",
-                cursor: "pointer",
-                colorScheme: "dark",
-                flex: "1 1 160px",
-                minWidth: 0,
-              }}
-            />
+            {/* Date */}
+            {activeTab === "dashboard" && (
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => onDateChange(e.target.value)}
+                style={{
+                  height: 36,
+                  borderRadius: 10,
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "rgba(255,255,255,0.05)",
+                  padding: "0 12px",
+                  fontSize: "0.8rem",
+                  fontWeight: 500,
+                  color: "#ffffff",
+                  outline: "none",
+                  cursor: "pointer",
+                  colorScheme: "dark",
+                  minWidth: 150,
+                  width: "100%",
+                  maxWidth: 180,
+                }}
+              />
+            )}
 
-            {/* History Button */}
-            <button
-              onClick={onHistoryOpen}
-              style={{
-                height: 36,
-                borderRadius: 10,
-                border: "1px solid rgba(255,255,255,0.1)",
-                background: "rgba(255,255,255,0.05)",
-                padding: "0 16px",
-                fontSize: "0.875rem",
-                fontWeight: 600,
-                color: "#cbd5e1",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 8,
-                transition: "all 0.2s",
-                flex: "1 1 140px",
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = "rgba(124,58,237,0.15)";
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(124,58,237,0.4)";
-                (e.currentTarget as HTMLButtonElement).style.color = "#ffffff";
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.05)";
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.1)";
-                (e.currentTarget as HTMLButtonElement).style.color = "#cbd5e1";
-              }}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-              History
-            </button>
+            {/* History */}
+            {activeTab === "dashboard" && (
+              <button
+                onClick={onHistoryOpen}
+                style={controlButtonStyle}
+              >
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#a78bfa"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+
+                <span>History</span>
+              </button>
+            )}
+
+            {/* Logout */}
+            {onLogout && (
+              <button
+                onClick={onLogout}
+                title="Logout"
+                style={{
+                  height: 36,
+                  width: 36,
+                  borderRadius: 10,
+                  border: "1px solid rgba(244,63,94,0.2)",
+                  background: "rgba(244,63,94,0.06)",
+                  color: "#fda4af",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       </div>
+
+      {/* RESPONSIVE CSS */}
+      <style>
+        {`
+          .header-brand-text {
+            display: none;
+          }
+
+          @media (min-width: 640px) {
+            .header-brand-text {
+              display: block;
+            }
+
+            .header-controls {
+              width: auto !important;
+              flex: 0 0 auto !important;
+            }
+          }
+
+          @media (max-width: 639px) {
+            .header-controls {
+              justify-content: stretch !important;
+            }
+
+            .header-controls > * {
+              flex: 1;
+            }
+          }
+        `}
+      </style>
     </header>
   );
 };

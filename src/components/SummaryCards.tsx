@@ -79,19 +79,21 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({
     <div style={{
       display: "grid",
       gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
-      gap: "0.75rem",
+      gap: "clamp(0.5rem, 2vw, 0.75rem)",
       width: "100%",
       alignItems: "stretch",
+      padding: "0 clamp(0.5rem, 2vw, 1rem)",
+      boxSizing: "border-box",
     }}>
       {cards.map((card) => (
         <div
           key={card.label}
           style={{
             position: "relative",
-            borderRadius: 16,
+            borderRadius: "clamp(12px, 3vw, 16px)",
             border: "1px solid rgba(255,255,255,0.08)",
             background: card.bg,
-            padding: "clamp(0.9rem, 2vw, 1.25rem)",
+            padding: "clamp(0.75rem, 2vw, 1.25rem)",
             backdropFilter: "blur(8px)",
             boxShadow: `0 0 40px -12px ${card.glow}`,
             overflow: "hidden",
@@ -111,14 +113,14 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({
             display: "flex",
             alignItems: "flex-start",
             justifyContent: "space-between",
-            gap: 12,
+            gap: "clamp(8px, 2vw, 12px)",
             width: "100%",
             minWidth: 0,
           }}>
             <div style={{ flex: 1, minWidth: 0 }}>
               <p style={{
                 margin: 0,
-                fontSize: "clamp(0.58rem, 1.5vw, 0.65rem)",
+                fontSize: "clamp(0.55rem, 1.8vw, 0.65rem)",
                 fontWeight: 700,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
@@ -130,8 +132,8 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({
               </p>
 
               <p style={{
-                margin: "8px 0 0",
-                fontSize: "clamp(1.05rem, 4vw, 1.5rem)",
+                margin: "clamp(4px, 1.5vw, 8px) 0 0",
+                fontSize: "clamp(0.9rem, 3.5vw, 1.5rem)",
                 fontWeight: 800,
                 fontFamily: "Syne, sans-serif",
                 color: card.textColor,
@@ -144,9 +146,9 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({
             </div>
 
             <div style={{
-              width: "clamp(34px, 8vw, 40px)",
-              height: "clamp(34px, 8vw, 40px)",
-              borderRadius: 10,
+              width: "clamp(28px, 7vw, 40px)",
+              height: "clamp(28px, 7vw, 40px)",
+              borderRadius: "clamp(8px, 2.5vw, 10px)",
               flexShrink: 0,
               background: card.iconBg,
               display: "flex",
@@ -154,11 +156,31 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({
               justifyContent: "center",
               boxShadow: `0 4px 16px -2px ${card.glow}`
             }}>
-              {card.icon}
+              {/* Make SVG responsive */}
+              {React.cloneElement(card.icon as React.ReactElement, {
+                width: "clamp(14px, 4vw, 20px)",
+                height: "clamp(14px, 4vw, 20px)",
+              })}
             </div>
           </div>
         </div>
       ))}
+
+      {/* Responsive media query for smaller screens */}
+      <style>{`
+        @media (max-width: 768px) {
+          .summary-cards-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.75rem !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .summary-cards-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.625rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
