@@ -141,7 +141,7 @@ const Header: React.FC<HeaderProps> = ({
               </div> */}
 
               <img
-                src="/coastal-lodge.png"
+                src="/Logo.png"
                 alt="Coastal Lodge"
                 style={{
                   width: 56,

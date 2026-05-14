@@ -47,27 +47,25 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, loading }) => {
     }}>
       {/* Ambient glows */}
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none" }}>
-        <div style={{ position: "absolute", left: "20%", top: "10%", width: 400, height: 400, borderRadius: "50%", background: "rgba(124,58,237,0.1)", filter: "blur(120px)" }} />
+        <div style={{ position: "absolute", left: "20%", top: "10%", width: 400, height: 400, borderRadius: "50%", background: "rgba(251,146,60,0.12)", filter: "blur(120px)" }} />
         <div style={{ position: "absolute", right: "15%", bottom: "15%", width: 300, height: 300, borderRadius: "50%", background: "rgba(99,102,241,0.08)", filter: "blur(100px)" }} />
       </div>
 
       <div style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: 420 }}>
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <div style={{
-            width: 56, height: 56, borderRadius: 16,
-            background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-            display: "inline-flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 8px 32px rgba(124,58,237,0.4)",
-            marginBottom: 16,
-          }}>
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
-              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22" stroke="white" strokeWidth="1.5" fill="none"/>
-            </svg>
-          </div>
+          <img
+  src="/Logo.png"
+  alt="Coastal Lodge"
+  style={{
+    width: 200,
+    height: 110,
+    objectFit: "contain",
+    filter: "drop-shadow(0 10px 30px rgba(251,146,60,0.25))",
+  }}
+/>
           <h1 style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, fontFamily: "Syne, sans-serif", color: "#ffffff" }}>
-            Hotel Dashboard
+            Coastal Dashboard
           </h1>
           <p style={{ margin: "6px 0 0", fontSize: "0.875rem", color: "#64748b" }}>
             Sign in to your account

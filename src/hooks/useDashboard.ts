@@ -6,6 +6,8 @@ import { Room, DaySummary, ApiRoom } from "../types/room";
 
 const NUM_ROOMS = 16;
 
+const token = localStorage.getItem("token");
+
 export function createDefaultRooms(): Room[] {
   return Array.from({ length: NUM_ROOMS }, (_, i) => ({
     roomNumber: i + 1,
@@ -110,6 +112,10 @@ export function useDashboard() {
 
   // On mount load today
   useEffect(() => {
+    if (!token) {
+      return;
+    }
+
     loadDayData(getToday());
   }, [loadDayData]);
 
