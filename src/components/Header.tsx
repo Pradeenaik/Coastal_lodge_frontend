@@ -150,6 +150,7 @@ const Header: React.FC<HeaderProps> = ({
                   borderRadius: 14,
                   flexShrink: 0,
                 }}
+                loading="eager"
               />
 
               {/* Hide text on very small screens */}

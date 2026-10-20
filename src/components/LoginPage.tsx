@@ -63,6 +63,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, loading }) => {
     objectFit: "contain",
     filter: "drop-shadow(0 10px 30px rgba(251,146,60,0.25))",
   }}
+  loading="eager"
 />
           <h1 style={{ margin: 0, fontSize: "1.6rem", fontWeight: 800, fontFamily: "Syne, sans-serif", color: "#ffffff" }}>
             Coastal Dashboard

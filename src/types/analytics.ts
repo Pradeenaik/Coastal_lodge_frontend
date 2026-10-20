@@ -1,6 +1,10 @@
 export interface MonthlyRevenue {
   month: string;
   total: number;
+  revenue: number;
+  commission: number;
+  net: number;
+  trueEarning?: number;
 }
 
 export interface WeeklyRevenue {
